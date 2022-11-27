@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RickAndMorty.Api", "RickAndMorty.Api\RickAndMorty.Api.csproj", "{8DB470A4-FE81-43A6-934C-04450ECEA01B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web api", "Web api", "{4B1CE5EA-7EE2-4772-851A-6792261C5561}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{114DE28C-B0FE-4EBD-9A40-A32D9FEAFB5F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{EF11EFFB-2255-4D64-8C8C-727F531F472C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RickAndMorty.Domain", "RickAndMorty.Domain\RickAndMorty.Domain.csproj", "{AFF0FC7E-44D0-48E6-91BB-EF803E29BFFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RickAndMorty.Application", "RickAndMorty.Application\RickAndMorty.Application.csproj", "{1DCFC577-EF78-473A-9221-E6510FE43DB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RickAndMorty.Infrastracture", "RickAndMorty.Infrastracture\RickAndMorty.Infrastracture.csproj", "{332C2F0C-D946-4272-8FB4-EF858387DD81}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3ED45915-60CD-4654-BE7C-037314A0F918}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8DB470A4-FE81-43A6-934C-04450ECEA01B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DB470A4-FE81-43A6-934C-04450ECEA01B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DB470A4-FE81-43A6-934C-04450ECEA01B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DB470A4-FE81-43A6-934C-04450ECEA01B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFF0FC7E-44D0-48E6-91BB-EF803E29BFFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFF0FC7E-44D0-48E6-91BB-EF803E29BFFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFF0FC7E-44D0-48E6-91BB-EF803E29BFFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFF0FC7E-44D0-48E6-91BB-EF803E29BFFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DCFC577-EF78-473A-9221-E6510FE43DB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DCFC577-EF78-473A-9221-E6510FE43DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DCFC577-EF78-473A-9221-E6510FE43DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DCFC577-EF78-473A-9221-E6510FE43DB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{332C2F0C-D946-4272-8FB4-EF858387DD81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{332C2F0C-D946-4272-8FB4-EF858387DD81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{332C2F0C-D946-4272-8FB4-EF858387DD81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{332C2F0C-D946-4272-8FB4-EF858387DD81}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8DB470A4-FE81-43A6-934C-04450ECEA01B} = {4B1CE5EA-7EE2-4772-851A-6792261C5561}
+		{1DCFC577-EF78-473A-9221-E6510FE43DB3} = {114DE28C-B0FE-4EBD-9A40-A32D9FEAFB5F}
+		{332C2F0C-D946-4272-8FB4-EF858387DD81} = {EF11EFFB-2255-4D64-8C8C-727F531F472C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {871FA427-BABA-427A-83C4-FC7E03A7C62F}
+	EndGlobalSection
+EndGlobal
