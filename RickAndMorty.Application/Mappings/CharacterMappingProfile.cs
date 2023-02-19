@@ -1,7 +1,7 @@
 ﻿namespace RickAndMorty.Application.Mappings
 {
     using AutoMapper;
-    using RickAndMorty.Domain.Models.Character;
+    using RickAndMorty.Domain.Models.Characters;
 
     public class CharacterMappingProfile: Profile
     {

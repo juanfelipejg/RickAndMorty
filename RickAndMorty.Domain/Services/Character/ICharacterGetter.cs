@@ -1,6 +1,6 @@
 ﻿namespace RickAndMorty.Domain.Services
 {
-    using Models.Character;
+    using Models.Characters;
 
     public interface ICharacterGetter
     {

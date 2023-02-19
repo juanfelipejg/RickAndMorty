@@ -2,7 +2,7 @@
 {
     using AutoMapper;
     using RestSharp;
-    using RickAndMorty.Domain.Models.Character;
+    using RickAndMorty.Domain.Models.Characters;
     using RickAndMorty.Domain.Services;
     using RickAndMorty.Infrastracture.Wrapper;
     using System.Collections.Generic;
