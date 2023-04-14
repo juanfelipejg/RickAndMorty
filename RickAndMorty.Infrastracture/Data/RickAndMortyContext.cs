@@ -1,18 +1,32 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RickAndMorty.Domain.Models.Characters;
-using RickAndMorty.Domain.Models.Episodes;
-
-namespace RickAndMorty.Infrastracture.Data
+﻿namespace RickAndMorty.Infrastracture.Data
 {
-    public class RickAndMortyContext: DbContext
+	using Microsoft.EntityFrameworkCore;
+	using Domain.Models.Characters;
+	using Domain.Models.Episodes;
+
+    public class RickAndMortyContext: DbContext, IRickAndMortyContext
     {
         public RickAndMortyContext( DbContextOptions<RickAndMortyContext> options ): base( options )
         {
 
         }
 
-        public DbSet<Character> Characters => Set<Character>();
+        public virtual DbSet<Character> Characters() => this.Set<Character>();
 
-        public DbSet<Episode> Episodes => Set<Episode>();
-    }
+        public virtual DbSet<Episode> Episodes() => this.Set<Episode>();
+
+		public int SaveChanges()
+		{
+			try
+			{
+				int result = base.SaveChanges();
+				
+				return result;
+			}
+			catch( DbUpdateException ex )
+			{
+				throw new Exception( "Ocurrió un error al guardar los cambios en la base de datos.", ex );
+			}
+		}
+	}
 }

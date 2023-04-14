@@ -1,4 +1,5 @@
-﻿using RickAndMorty.Domain.Models.Episodes;
+﻿using System.Text.Json.Serialization;
+using RickAndMorty.Domain.Models.Episodes;
 
 namespace RickAndMorty.Domain.Models.Characters
 {
@@ -20,6 +21,7 @@ namespace RickAndMorty.Domain.Models.Characters
 
         public string Url { get; set; }
 
-        public List<Episode> Episodes { get; set; }
+		[JsonIgnore]
+		public List<Episode> Episodes { get; set; }
     }
 }
