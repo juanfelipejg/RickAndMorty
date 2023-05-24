@@ -1,6 +1,7 @@
 namespace RickAndMorty.Tests
 {
 	using System.Collections.Generic;
+	using Microsoft.Extensions.Logging;
 	using Moq;
 	using RickAndMorty.Application.Services.Character;
 	using RickAndMorty.Domain.Models.Characters;
@@ -16,8 +17,9 @@ namespace RickAndMorty.Tests
 			//Arrange
 			var mock = new Mock<ICharacterGetter>();
 			var context = new Mock<IRickAndMortyContext>();
+			var logger = new Mock<ILogger<CharacterService>>();
 
-			var characterService = new CharacterService( mock.Object, context.Object );
+			var characterService = new CharacterService( mock.Object, context.Object, logger.Object );
 
 			var character = new Character
 			{

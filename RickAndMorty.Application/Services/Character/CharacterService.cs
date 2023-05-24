@@ -1,19 +1,22 @@
 ﻿namespace RickAndMorty.Application.Services.Character
 {
-	using RickAndMorty.Domain.Models.Characters;
-	using RickAndMorty.Domain.Services;
-	using RickAndMorty.Infrastracture.Data;
+	using Domain.Models.Characters;
+	using Domain.Services;
+	using Infrastracture.Data;
 	using Microsoft.EntityFrameworkCore;
+	using Microsoft.Extensions.Logging;
 
 	public class CharacterService: ICharacterService
 	{
 		private readonly ICharacterGetter characterGetter;
 		private readonly IRickAndMortyContext rickAndMortyContext;
+		private readonly ILogger<CharacterService> logger;
 
-		public CharacterService( ICharacterGetter characterGetter, IRickAndMortyContext rickAndMortyContext )
+		public CharacterService( ICharacterGetter characterGetter, IRickAndMortyContext rickAndMortyContext, ILogger<CharacterService> logger )
 		{
 			this.characterGetter = characterGetter;
 			this.rickAndMortyContext = rickAndMortyContext;
+			this.logger = logger;
 		}
 
 		public IEnumerable<Character> GetAll()
@@ -28,7 +31,7 @@
 
 		public Character Create( Character character )
 		{
-			this.rickAndMortyContext.Characters().Add( character );
+			this.logger.LogInformation( $"Se esta ingresando el character: {character}" );
 			this.rickAndMortyContext.SaveChanges();
 
 			return character;

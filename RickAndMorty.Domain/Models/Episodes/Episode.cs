@@ -1,4 +1,6 @@
-﻿using RickAndMorty.Domain.Models.Characters;
+﻿using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+using RickAndMorty.Domain.Models.Characters;
 
 namespace RickAndMorty.Domain.Models.Episodes
 {

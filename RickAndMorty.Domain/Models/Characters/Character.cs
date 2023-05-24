@@ -1,4 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using RickAndMorty.Domain.Models.Episodes;
 
 namespace RickAndMorty.Domain.Models.Characters
@@ -20,8 +22,5 @@ namespace RickAndMorty.Domain.Models.Characters
         public string Image { get; set; }
 
         public string Url { get; set; }
-
-		[JsonIgnore]
-		public List<Episode> Episodes { get; set; }
     }
 }
