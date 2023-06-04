@@ -9,10 +9,10 @@
 	public class CharacterService: ICharacterService
 	{
 		private readonly ICharacterGetter characterGetter;
-		private readonly IRickAndMortyContext rickAndMortyContext;
+		private readonly RickAndMortyContext rickAndMortyContext;
 		private readonly ILogger<CharacterService> logger;
 
-		public CharacterService( ICharacterGetter characterGetter, IRickAndMortyContext rickAndMortyContext, ILogger<CharacterService> logger )
+		public CharacterService( ICharacterGetter characterGetter, RickAndMortyContext rickAndMortyContext, ILogger<CharacterService> logger )
 		{
 			this.characterGetter = characterGetter;
 			this.rickAndMortyContext = rickAndMortyContext;
@@ -26,11 +26,12 @@
 
 		public IEnumerable<Character> GetAllFavoriteCharacters()
 		{
-			return this.rickAndMortyContext.Characters().AsNoTracking().ToList();
+			return this.rickAndMortyContext.Characters.AsNoTracking().ToList();
 		}
 
 		public Character Create( Character character )
 		{
+			this.rickAndMortyContext.Characters.Add( character );
 			this.logger.LogInformation( $"Se esta ingresando el character: {character}" );
 			this.rickAndMortyContext.SaveChanges();
 
@@ -39,7 +40,7 @@
 
 		public void Update( string id, Character character )
 		{
-			Character? characterToUpdate = this.rickAndMortyContext.Characters().Find( id );
+			Character? characterToUpdate = this.rickAndMortyContext.Characters.Find( id );
 
 			if( characterToUpdate is null )
 			{
@@ -53,11 +54,11 @@
 
 		public void DeleteById( string id )
 		{
-			var characterToDelete = this.rickAndMortyContext.Characters().Find( id );
+			var characterToDelete = this.rickAndMortyContext.Characters.Find( id );
 
 			if( characterToDelete is not null )
 			{
-				this.rickAndMortyContext.Characters().Remove( characterToDelete );
+				this.rickAndMortyContext.Characters.Remove( characterToDelete );
 				this.rickAndMortyContext.SaveChanges();
 			}
 		}

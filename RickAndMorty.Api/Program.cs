@@ -21,7 +21,6 @@ builder.Services.AddTransient<ICharacterService, CharacterService>();
 builder.Services.AddTransient<IEpisodeService, EpisodeService>();
 builder.Services.AddTransient<ICharacterGetter, CharacterGetter>();
 builder.Services.AddTransient<IRestClientWrapper, RestClientWrapper>();
-//builder.Services.AddTransient<IRickAndMortyContext, RickAndMortyContext>();
 builder.Services.AddDbContext<RickAndMortyContext>( context => context.UseMySql( connectionString, ServerVersion.AutoDetect( connectionString ) ) );
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

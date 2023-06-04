@@ -15,30 +15,30 @@ namespace RickAndMorty.Application.Services
 
 		public Episode Create( Episode episode )
 		{
-			this.rickAndMortyContext.Episodes().Add( episode );
+			this.rickAndMortyContext.Episodes.Add( episode );
 			this.rickAndMortyContext.SaveChanges();
 			return episode;
 		}
 
 		public void Delete( int id )
 		{
-			Episode? episode = this.rickAndMortyContext.Episodes().Find( id );
+			Episode? episode = this.rickAndMortyContext.Episodes.Find( id );
 
 			if( episode is not null )
 			{
-				this.rickAndMortyContext.Episodes().Remove( episode );
+				this.rickAndMortyContext.Episodes.Remove( episode );
 				this.rickAndMortyContext.SaveChanges();
 			}
 		}
 
 		public List<Episode> GetAll()
 		{
-			return this.rickAndMortyContext.Episodes().AsNoTracking().ToList();
+			return this.rickAndMortyContext.Episodes.AsNoTracking().ToList();
 		}
 
 		public Episode GetById( int id )
 		{
-			return this.rickAndMortyContext.Episodes().Find( id );
+			return this.rickAndMortyContext.Episodes.Find( id );
 		}
 
 		public Episode Update( Episode episode )

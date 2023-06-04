@@ -10,6 +10,6 @@ namespace RickAndMorty.Domain.Models.Episodes
 
         public string Name { get; set; }
 
-        public List<Character> Characters { get; set; }
+        public ICollection<Character> Characters { get; set; }
     }
 }

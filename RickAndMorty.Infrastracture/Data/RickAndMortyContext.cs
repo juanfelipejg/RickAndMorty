@@ -4,16 +4,16 @@
 	using Domain.Models.Characters;
 	using Domain.Models.Episodes;
 
-    public class RickAndMortyContext: DbContext, IRickAndMortyContext
-    {
-        public RickAndMortyContext( DbContextOptions<RickAndMortyContext> options ): base( options )
-        {
+	public class RickAndMortyContext: DbContext
+	{
+		public RickAndMortyContext( DbContextOptions<RickAndMortyContext> options ) : base( options )
+		{
 
-        }
+		}
 
-        public virtual DbSet<Character> Characters() => this.Set<Character>();
+		public DbSet<Character> Characters  { get; set; }
 
-        public virtual DbSet<Episode> Episodes() => this.Set<Episode>();
+        public DbSet<Episode> Episodes { get; set; }
 
 		public int SaveChanges()
 		{
@@ -27,6 +27,13 @@
 			{
 				throw new Exception( "Ocurrió un error al guardar los cambios en la base de datos.", ex );
 			}
+		}
+
+		protected override void OnModelCreating( ModelBuilder modelBuilder )
+		{
+			modelBuilder.Entity<Character>()
+				.HasMany( c => c.Episodes )
+				.WithMany( e => e.Characters );
 		}
 	}
 }
