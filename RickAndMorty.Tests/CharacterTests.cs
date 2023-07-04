@@ -1,12 +1,5 @@
 namespace RickAndMorty.Tests
 {
-	using System.Collections.Generic;
-	using Microsoft.Extensions.Logging;
-	using Moq;
-	using RickAndMorty.Application.Services.Character;
-	using RickAndMorty.Domain.Models.Characters;
-	using RickAndMorty.Domain.Services;
-	using RickAndMorty.Infrastracture.Data;
 	using Xunit;
 
 	public class CharacterTests

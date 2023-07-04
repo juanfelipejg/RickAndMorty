@@ -22,6 +22,6 @@ namespace RickAndMorty.Domain.Models.Characters
         public string Url { get; set; }
 
 		[IgnoreDataMember]
-		public ICollection<Episode>? Episodes { get; set; }
+		public ICollection<EpisodeCharacter>? Episodes { get; set; }
     }
 }

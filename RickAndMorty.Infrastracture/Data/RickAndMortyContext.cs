@@ -15,25 +15,19 @@
 
         public DbSet<Episode> Episodes { get; set; }
 
-		public int SaveChanges()
-		{
-			try
-			{
-				int result = base.SaveChanges();
-				
-				return result;
-			}
-			catch( DbUpdateException ex )
-			{
-				throw new Exception( "Ocurrió un error al guardar los cambios en la base de datos.", ex );
-			}
-		}
-
 		protected override void OnModelCreating( ModelBuilder modelBuilder )
 		{
-			modelBuilder.Entity<Character>()
-				.HasMany( c => c.Episodes )
-				.WithMany( e => e.Characters );
+			modelBuilder.Entity<EpisodeCharacter>().HasKey( x => new { x.EpisodeId, x.CharacterId } );
+
+			modelBuilder.Entity<EpisodeCharacter>()
+				.HasOne( po => po.Episode )
+				.WithMany( p => p.Characters )
+				.HasForeignKey( po => po.EpisodeId );
+
+			modelBuilder.Entity<EpisodeCharacter>()
+				.HasOne( po => po.Character )
+				.WithMany( o => o.Episodes )
+				.HasForeignKey( po => po.CharacterId );
 		}
 	}
 }

@@ -1,10 +1,9 @@
 namespace RickAndMorty.Api.Controllers
 {
-    using Microsoft.AspNetCore.Mvc;
-    using RickAndMorty.Application.Services.Character;
-    using RickAndMorty.Domain.Models.Characters;
-
-    [ApiController]
+	using Application.Services.Characters;
+	using Microsoft.AspNetCore.Mvc;
+	using RickAndMorty.Domain.Models.Characters;
+	[ApiController]
     [Route( "api/characters" )]
     public class CharacterController : ControllerBase
     {
@@ -15,7 +14,7 @@ namespace RickAndMorty.Api.Controllers
             this.characterService = characterService;
         }
 
-        [HttpGet]
+		[HttpGet]
         public IEnumerable<Character> Get()
         {
             return this.characterService.GetAll();

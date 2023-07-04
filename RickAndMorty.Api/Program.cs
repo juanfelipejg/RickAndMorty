@@ -1,7 +1,6 @@
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Data;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using RickAndMorty.Application.Services;
 using RickAndMorty.Application.Services.Characters;
 using RickAndMorty.Domain.Services;
@@ -24,31 +23,12 @@ builder.Services.AddTransient<ICharacterService, CharacterService>();
 builder.Services.AddTransient<IEpisodeService, EpisodeService>();
 builder.Services.AddTransient<ICharacterGetter, CharacterGetter>();
 builder.Services.AddTransient<IRestClientWrapper, RestClientWrapper>();
-builder.Services.AddDbContext<RickAndMortyContext>( context => context.UseMySql( connectionString, ServerVersion.AutoDetect( connectionString ) ) );
+builder.Services.AddDbContext<RickAndMortyContext>( context => context.UseSqlServer( connectionString ) );
+builder.Services.AddTransient<IDbConnection>( sp => new SqlConnection( connectionString ) );
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddAuthentication( options =>
-{
-	options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-	options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-} ).AddJwtBearer( options =>
-{
-	options.TokenValidationParameters = new TokenValidationParameters
-	{
-		ValidateIssuer = true,
-		ValidateAudience = true,
-		ValidateLifetime = true,
-		ValidateIssuerSigningKey = true,
-		ValidIssuer = "https://yourdomain.com",
-		ValidAudience = "YourAudience",
-		IssuerSigningKey = new SymmetricSecurityKey( Encoding.UTF8.GetBytes( "YourSecretKey" ) )
-	};
-} );
-
-
-
 
 builder.Services.AddCors( options =>
 {
@@ -78,7 +58,6 @@ if( app.Environment.IsDevelopment() )
 app.UseHttpsRedirection();
 
 app.UseCors( "AllowAllOrigins" );
-
 
 app.UseAuthorization();
 

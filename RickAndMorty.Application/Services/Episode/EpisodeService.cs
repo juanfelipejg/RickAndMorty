@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RickAndMorty.Domain.Models.Episodes;
-using RickAndMorty.Infrastracture.Data;
-
-namespace RickAndMorty.Application.Services
+﻿namespace RickAndMorty.Application.Services
 {
+	using System.Collections.Generic;
+	using Microsoft.EntityFrameworkCore;
+	using Domain.Models.Episodes;
+	using Infrastracture.Data;
+
 	public class EpisodeService: IEpisodeService
 	{
 		private readonly RickAndMortyContext rickAndMortyContext;
@@ -15,9 +16,31 @@ namespace RickAndMorty.Application.Services
 
 		public Episode Create( Episode episode )
 		{
-			this.rickAndMortyContext.Episodes.Add( episode );
+			var newEpisode = new Episode
+			{
+				Name = episode.Name,
+				Characters = this.GetCharacters( episode.Characters ),
+			};
+
+			Episode episodeCreated = this.rickAndMortyContext.Episodes.Add( newEpisode ).Entity;
 			this.rickAndMortyContext.SaveChanges();
-			return episode;
+
+			return episodeCreated;
+		}
+
+		private ICollection<EpisodeCharacter> GetCharacters( ICollection<EpisodeCharacter> characters )
+		{
+			var newCharacters = new List<EpisodeCharacter>();
+
+			foreach ( var character in characters )
+			{
+				newCharacters.Add( new EpisodeCharacter
+				{
+					CharacterId = character.CharacterId
+				} );
+			}
+
+			return newCharacters;
 		}
 
 		public void Delete( int id )

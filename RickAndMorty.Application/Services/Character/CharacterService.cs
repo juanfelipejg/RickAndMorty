@@ -1,4 +1,4 @@
-﻿namespace RickAndMorty.Application.Services.Character
+﻿namespace RickAndMorty.Application.Services.Characters
 {
 	using Domain.Models.Characters;
 	using Domain.Services;
