@@ -1,12 +1,16 @@
 using System.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using RickAndMorty.Application.Services;
 using RickAndMorty.Application.Services.Characters;
 using RickAndMorty.Domain.Services;
 using RickAndMorty.Infrastracture;
 using RickAndMorty.Infrastracture.Data;
 using RickAndMorty.Infrastracture.Wrapper;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder( args );
 string connectionString = builder.Configuration.GetConnectionString( "Default" );
@@ -26,9 +30,54 @@ builder.Services.AddTransient<IRestClientWrapper, RestClientWrapper>();
 builder.Services.AddDbContext<RickAndMortyContext>( context => context.UseSqlServer( connectionString ) );
 builder.Services.AddTransient<IDbConnection>( sp => new SqlConnection( connectionString ) );
 
+byte[] key = Encoding.ASCII.GetBytes( builder.Configuration["Jwt:SecretKey"] );
+
+builder.Services.AddAuthentication( options =>
+{
+	options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+	options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+} )
+.AddJwtBearer( options =>
+{
+	options.RequireHttpsMetadata = false;
+	options.SaveToken = true;
+	options.TokenValidationParameters = new TokenValidationParameters
+	{
+		ValidateIssuerSigningKey = true,
+		IssuerSigningKey = new SymmetricSecurityKey( key ),
+		ValidateIssuer = false,
+		ValidateAudience = false
+	};
+} );
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen( c =>
+{
+	c.SwaggerDoc( "v1", new OpenApiInfo { Title = "Your API", Version = "v1" } );
+
+	c.AddSecurityDefinition( "Bearer", new OpenApiSecurityScheme
+	{
+		Description = "JWT Authorization header using the Bearer scheme",
+		Type = SecuritySchemeType.Http,
+		Scheme = "bearer"
+	} );
+
+	c.AddSecurityRequirement( new OpenApiSecurityRequirement
+		{
+			{
+				new OpenApiSecurityScheme
+				{
+					Reference = new OpenApiReference
+					{
+						Type = ReferenceType.SecurityScheme,
+						Id = "Bearer"
+					}
+				},
+				new string[] {}
+			}
+		} );
+} );
 
 builder.Services.AddCors( options =>
 {
